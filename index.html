@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天框的输入</title>
+    <link rel="stylesheet" href="https://sherrywanna.github.io/resource/src/css/init.css">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 内容显示窗口 -->
+        <div class="msg_content">
+            <div class="msg_boxes">
+                
+            </div>
+        </div>
+
+        <div id="local-dialog" class="">
+            <div id="groupshowlist" style="display: none;"></div>
+
+            <div class="dialog-emoji dialog hidden" unselectable="on" style="opacity: 1; top: -290px;">
+                <div class="dialog-emoji__title">表情</div>
+                <div class="dialog-emoji__content clearfix"></div>
+            </div>
+
+            <!-- 功能窗口 -->
+            <div class="toolbar">
+                <div id="input_fun_emoji" title="表情" unselectable="on">
+                    <a href="javascript:;"><i class="glyphicon glyphicon-emoji">:）</i></a>
+                </div>
+            </div>
+
+            <!-- 输入框 -->
+            <div style="margin-top: 5px">
+                <pre id="local-message-container" class="placeholder" contenteditable="true" spellcheck="false" placeholder="在此输入消息..."></pre>
+            </div>
+
+            <!-- 操作界面 -->
+            <div style="margin-top: 5px">
+                <div style="text-align: right">
+                    <div class="btn btn-primary btn-sm" id="send-message-btn" style="width:86px"> 发送</div>
+                    <div class="ctrlenter">Ctrl+Enter 换行</div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="./js/common.js"></script>
+    <script type="text/javascript" src="./js/emoji.js"></script>
+    <script type="text/javascript" src="./js/cursor.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+</body>
+</html>
