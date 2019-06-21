@@ -5,6 +5,11 @@
         $container = container;
     }
 
+    function getSelectContent() {
+        var selection = window.getSelection();
+        return selection.toString();
+    }
+
     function insertContent(content) {
         var selection = window.getSelection(),
             range = selection.getRangeAt(0);
@@ -34,6 +39,7 @@
 
     window.Cursor = {
         init,
-        insertContent
+        insertContent,
+        getSelectContent
     };
 })();

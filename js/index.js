@@ -45,6 +45,22 @@
         return;
     }, false);
 
+        // 监听复制事件，将复制的东西后面加上小尾巴
+    document.addEventListener('copy', function(e) {
+        var clipboardData = e.clipboardData,
+            // 获取选中内容
+            content = Cursor.getSelectContent();
+
+        clipboardData.setData('text/plain', content + ', 我的小尾巴~~~~');
+
+        e.preventDefault();
+        return;
+    });
+
+    document.querySelector('#input_fun_copy').addEventListener('click', function() {
+        navigator.clipboard.writeText(Cursor.getSelectContent());
+    }, false);
+
         // 设置placeholder
     $editBox.addEventListener('input', function(e) {
         setPlaceHolder();

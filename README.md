@@ -51,6 +51,10 @@
 
 
 
+
+[`Clipboard`](https://developer.mozilla.org/zh-CN/docs/Web/API/Clipboard) 方法其实还有很多拓展， 比如我们常常在 blog 上面看到一些东西想要复制， 粘贴的时候就会发现后面有 ‘请注明出处’ 等尾巴，也是用这个对象把内容写到粘贴板的。
+
+
 #### 资料
 
 [W3school Range 对象介绍](http://www.w3school.com.cn/xmldom/dom_range.asp)
