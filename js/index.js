@@ -1,4 +1,10 @@
 (function() {
+    
+    setContentHeight();
+    window.onresize = function() {
+        setContentHeight();
+    };
+    
     var $editBox = document.querySelector('#local-message-container'),
         $showMsgBox = document.querySelector('.msg_boxes'),
         $sendBtn = document.querySelector('#send-message-btn'),
@@ -113,6 +119,11 @@
 
         $editBox.innerHTML = '';
         setPlaceHolder();
+    }
+
+    // 设置内容框的高度
+    function setContentHeight() {
+        document.getElementsByClassName('msg_content')[0].style.height = document.documentElement.clientHeight - document.getElementById('local-dialog').clientHeight + 'px';
     }
 
 })();
