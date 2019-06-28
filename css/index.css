@@ -138,6 +138,7 @@ html, body {
     content: attr(placeholder);
     display: block;
     color: #c7c7c7;
+    cursor: text;
 }
 .curPosition {
     width: 100%;
@@ -156,6 +157,7 @@ html, body {
     font-size: 12px;
     line-height: 1.5;
     border-radius: 3px;
+    -webkit-user-modify: read-write-plaintext-only;
 }
 
 .ctrlenter {

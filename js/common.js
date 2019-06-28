@@ -1,17 +1,20 @@
 (function () {
+    let hiddenClassName = 'hidden';
+
     function hideDom(dom) {
-        addClass(dom, 'hidden');
+        if (!hasClass(dom, hiddenClassName)) {
+            addClass(dom, hiddenClassName);
+        }
     }
 
     function showDom(dom) {
-        removeClass(dom, 'hidden');
+        if (hasClass(dom, hiddenClassName)) {
+            removeClass(dom, hiddenClassName);
+        }
     }
 
-    // 这个方法有漏洞 我知道但是我没有时间了
     function hasClass(dom, className) {
-        var domClassName = dom.className;
-
-        return domClassName.indexOf(className) >= 0;
+        return dom.className.split(' ').indexOf(className) >= 0;
     }
 
     function addClass(dom, className) {
@@ -29,12 +32,22 @@
         return content.trim().replace(/&/g, '&amp;').replace(/ /g, '&nbsp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\\/g, '&#92;');
     }
 
+    function isClick(event, dom) {
+        for (var path of event.path) {
+            if (path === dom) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     window.Util = {
         hideDom,
         showDom,
         addClass,
         removeClass,
         hasClass,
-        translateContent
+        translateContent,
+        isClick
     };
 })();

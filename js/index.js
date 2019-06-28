@@ -1,9 +1,5 @@
 (function() {
-    
-    setContentHeight();
-    window.onresize = function() {
-        setContentHeight();
-    };
+    setLayout();
     
     var $editBox = document.querySelector('#local-message-container'),
         $showMsgBox = document.querySelector('.msg_boxes'),
@@ -12,18 +8,17 @@
 
     Cursor.init($editBox);
 
-    // 添加事件
-        // 发送按钮
+    // 发送按钮
     $sendBtn.addEventListener('click', function() {
         sendMsg();
     }, false);
 
-        // 功能表上的
+    // 功能表上的
     $emojiBtn.addEventListener('click', function() {
         Emoji.toggle();
     }, false);
 
-        // 添加表情
+    // 添加表情
     Emoji.addEvent(function(e) {
         // 使用 range 插入
         var emoji = '<img class="emoji_img" src="./img/spacer.gif" style="' + this.getAttribute('style') + '"/>';
@@ -42,7 +37,7 @@
         setPlaceHolder();
     });
 
-        // 粘贴事件
+    // 粘贴事件
     $editBox.addEventListener('paste', function(e) {
         var content = e.clipboardData.getData('Text');
         Cursor.insertContent(content);
@@ -51,7 +46,7 @@
         return;
     }, false);
 
-        // 监听复制事件，将复制的东西后面加上小尾巴
+    // 监听复制事件，将复制的东西后面加上小尾巴
     document.addEventListener('copy', function(e) {
         var clipboardData = e.clipboardData,
             // 获取选中内容
@@ -63,22 +58,32 @@
         return;
     });
 
+    // 添加按钮复制事件
     document.querySelector('#input_fun_copy').addEventListener('click', function() {
         navigator.clipboard.writeText(Cursor.getSelectContent());
     }, false);
 
-        // 设置placeholder
+    // 监听鼠标点击整个页面的事件
+    document.documentElement.addEventListener('click', function(e) {
+        var target = e.target;
+        
+        // 点击非表情弹框区域使表情弹框消失
+        if (!Util.isClick(e, document.querySelector('.dialog-emoji'))) {
+            Emoji.hide();
+        }
+    }, true);
+
+    // 设置placeholder
     $editBox.addEventListener('input', function(e) {
         setPlaceHolder();
     }, false);
 
-        // 监听快捷键
+    // 监听快捷键
     $editBox.addEventListener('keydown', function(e) {
-        var lineFeeds = '\r\n';
         // 换行
         if (e.ctrlKey && e.keyCode == 13) {
             e.preventDefault();
-            Cursor.insertContent(lineFeeds);
+            Cursor.insertWrap();
         } else if (e.keyCode == 13) {
             e.preventDefault();
 
@@ -90,11 +95,10 @@
                 clearTimeout(timer);
                 if (e.ctrlKey) {
                     e.preventDefault();
-                    Cursor.insertContent(lineFeeds);
+                    Cursor.insertWrap();
                 }
             });
         }
-
         setPlaceHolder();
     }, false);
 
@@ -122,8 +126,16 @@
     }
 
     // 设置内容框的高度
-    function setContentHeight() {
-        document.getElementsByClassName('msg_content')[0].style.height = document.documentElement.clientHeight - document.getElementById('local-dialog').clientHeight + 'px';
+    function setLayout() {
+        setContentHeight();
+        window.onresize = function() {
+            setContentHeight();
+        };
+
+        function setContentHeight() {
+            document.getElementsByClassName('msg_content')[0].style.height = document.documentElement.clientHeight - document.getElementById('local-dialog').clientHeight + 'px';
+        }
     }
+    
 
 })();
