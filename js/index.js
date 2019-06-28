@@ -25,15 +25,6 @@
         $editBox.focus();
         Cursor.insertContent(emoji);
 
-        // 平常我们插入元素
-        // var $emoji = document.createElement('img');
-        // $emoji.className = 'emoji_img';
-        // $emoji.setAttribute('style', this.getAttribute('style'));
-        // $emoji.src = './img/spacer.gif'
-
-        // $editBox.appendChild($emoji);
-        // $editBox.focus();
-
         setPlaceHolder();
     });
 
@@ -93,7 +84,7 @@
             var timer = setTimeout(sendMsg, 1e2);
 
             this.addEventListener('keydown', function clearTimer(e) {
-                this.removeEventListener(clearTimer);
+                this.removeEventListener('keydown', clearTimer);
                 clearTimeout(timer);
                 if (e.ctrlKey) {
                     e.preventDefault();
@@ -115,11 +106,16 @@
     }
 
     function sendMsg() {
-        var msg = $editBox.innerHTML,
-            msgDom = document.createElement('div');
+        var msg = $editBox.innerHTML.replace(/<br>/g, '\n').trim(),
+            msgDom;
 
+        if (!msg) {
+            return;
+        }
+
+        msgDom = document.createElement('div');
         msgDom.className = 'msg_box';
-        msgDom.innerHTML = msg.replace(/<br>/g, '\n').trim();
+        msgDom.innerHTML = msg;
 
         $showMsgBox.appendChild(msgDom);
 
