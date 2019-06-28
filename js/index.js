@@ -80,11 +80,13 @@
 
     // 监听快捷键
     $editBox.addEventListener('keydown', function(e) {
+        var enterKey = 13;
+
         // 换行
-        if (e.ctrlKey && e.keyCode == 13) {
+        if (e.ctrlKey && e.keyCode == enterKey) {
             e.preventDefault();
             Cursor.insertWrap();
-        } else if (e.keyCode == 13) {
+        } else if (e.keyCode == enterKey) {
             e.preventDefault();
 
             // 防止点击换行
@@ -117,7 +119,7 @@
             msgDom = document.createElement('div');
 
         msgDom.className = 'msg_box';
-        msgDom.innerHTML = msg;
+        msgDom.innerHTML = msg.replace(/<br>/g, '\n').trim();
 
         $showMsgBox.appendChild(msgDom);
 
